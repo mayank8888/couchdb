@@ -26,6 +26,8 @@ function(app, FauxtonAPI) {
     url: function(context) {
       if (context === "app") {
         return this.getDatabase().url("app") + "/" + this.safeID();
+      } else if (context === "web-index") {
+        return this.getDatabase().url("app") + "/" + app.mixins.safeURLName(this.id);
       } else {
         return app.host + "/" + this.getDatabase().safeID() + "/" + this.safeID();
       }
@@ -139,7 +141,11 @@ function(app, FauxtonAPI) {
     // treated separately. For instance, we could default into the
     // json editor for docs, or into a ddoc specific page.
     safeID: function() {
-      return app.mixins.safeURLName(this.id);
+      if (this.isDdoc()){
+        return this.id;
+      }else{
+        return app.mixins.safeURLName(this.id);
+      }
     },
 
     destroy: function() {

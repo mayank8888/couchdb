@@ -238,10 +238,11 @@ function(app, FauxtonAPI, Components, Documents, Databases, pouchdb, resizeColum
 
     duplicate: function (event) {
       event.preventDefault();
-      var newId = this.$('#dup-id').val();
+      var newId = this.$('#dup-id').val(),
+          encodedID = app.mixins.safeURLName(newID);
 
       this.hideModal();
-      FauxtonAPI.triggerRouteEvent('duplicateDoc', newId);
+      FauxtonAPI.triggerRouteEvent('duplicateDoc', encodedID);
     },
 
     _showModal: function () {
