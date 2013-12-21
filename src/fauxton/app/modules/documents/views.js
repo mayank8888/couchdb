@@ -1715,7 +1715,7 @@ function(app, FauxtonAPI, Components, Documents, Databases, pouchdb, resizeColum
 
       this.collection.each(function(design) {
         if (design.has('doc')){
-          var ddoc = design.id.replace(/_design\//,"");
+          var ddoc = design.id.replace(/^_design\//,"");
           if (design.get('doc').views){
             this.buildIndexList(design.get('doc').views, "views", ddoc);
           }
